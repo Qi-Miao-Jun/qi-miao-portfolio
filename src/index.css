@@ -1,0 +1,204 @@
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap');
+
+@import "tailwindcss";
+
+/* Tailwind Theme Customization */
+@theme {
+  --font-body: 'Inter', sans-serif;
+  --font-display: 'Instrument Serif', serif;
+
+  /* Colors */
+  --color-bg: hsl(0 0% 4%);
+  --color-surface: hsl(0 0% 8%);
+  --color-text-primary: hsl(0 0% 96%);
+  --color-muted: hsl(0 0% 53%);
+  --color-stroke: hsl(0 0% 12%);
+  --color-accent: hsl(0 0% 96%);
+}
+
+/* Base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: hsl(0 0% 4%);
+  color: hsl(0 0% 96%);
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: hsl(0 0% 4%);
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(0 0% 20%);
+  border-radius: 3px;
+}
+
+/* Accent gradient utility */
+.accent-gradient {
+  background: linear-gradient(90deg, #89AACC 0%, #4E85BF 100%);
+}
+
+/* Animated gradient border */
+.gradient-border-animate {
+  background: linear-gradient(90deg, #89AACC, #4E85BF, #89AACC);
+  background-size: 200% auto;
+  animation: gradient-shift 3s linear infinite;
+}
+
+/* Custom animations */
+@keyframes scroll-down {
+  0% { transform: translateY(-100%); opacity: 0; }
+  50% { opacity: 1; }
+  100% { transform: translateY(200%); opacity: 0; }
+}
+
+@keyframes role-fade-in {
+  0% { opacity: 0; transform: translateY(8px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.animate-scroll-down {
+  animation: scroll-down 1.5s ease-in-out infinite;
+}
+
+.animate-role-fade-in {
+  animation: role-fade-in 0.4s ease-out forwards;
+}
+
+.animate-marquee {
+  animation: marquee 40s linear infinite;
+}
+
+/* Blur in animation */
+.blur-in {
+  opacity: 0;
+  filter: blur(10px);
+  transition: opacity 1s ease-out, filter 1s ease-out;
+}
+.blur-in.revealed {
+  opacity: 1;
+  filter: blur(0px);
+}
+
+/* Name reveal */
+.name-reveal {
+  opacity: 0;
+  transform: translateY(50px);
+}
+
+/* Progress bar glow */
+.progress-glow {
+  box-shadow: 0 0 8px rgba(137, 170, 204, 0.35);
+}
+
+/* Hover pill */
+.hover-pill {
+  position: relative;
+  isolation: isolate;
+}
+.hover-pill::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #89AACC 0%, #4E85BF 100%);
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.hover-pill:hover::before {
+  opacity: 1;
+}
+
+/* Gradient border ring on hover */
+.gradient-ring-hover:hover {
+  box-shadow: 0 0 0 2px #89AACC, 0 0 0 4px #4E85BF;
+}
+
+/* Bento card hover */
+.bento-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1.5rem;
+  border: 1px solid hsl(0 0% 12%);
+  background-color: hsl(0 0% 8%);
+  transition: transform 0.4s ease, border-color 0.3s ease;
+}
+.bento-card:hover {
+  transform: scale(1.02);
+  border-color: hsl(0 0% 20%);
+}
+.bento-card:hover .bento-overlay {
+  opacity: 1;
+}
+.bento-overlay {
+  opacity: 0;
+  background-color: hsl(0 0% 4% / 0.7);
+  backdrop-filter: blur(12px);
+  transition: opacity 0.3s ease;
+}
+.bento-halftone {
+  background-image: radial-gradient(circle, hsl(0 0% 0%) 1px, transparent 1px);
+  background-size: 4px 4px;
+  opacity: 0.2;
+  mix-blend-mode: multiply;
+}
+
+/* Gradient border pill */
+.gradient-pill-border {
+  background: linear-gradient(hsl(0 0% 8%), hsl(0 0% 8%)) padding-box,
+              linear-gradient(90deg, #89AACC, #4E85BF) border-box;
+  border: 2px solid transparent;
+  background-size: 100% 100%, 200% auto;
+  transition: background-size 0.3s ease;
+}
+.gradient-pill-border:hover {
+  background-size: 100% 100%, 200% auto;
+  box-shadow: 0 0 12px rgba(137, 170, 204, 0.3);
+}
+
+/* Journal entry */
+.journal-entry {
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+.journal-entry:hover {
+  background-color: hsl(0 0% 8%);
+  border-color: hsl(0 0% 20%);
+}
+
+/* Video background */
+.video-bg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+}
