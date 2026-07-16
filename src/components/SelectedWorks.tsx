@@ -8,7 +8,7 @@ const projects = [
     desc: 'AICG恐怖短片作品',
     span: 'col-span-7',
     aspect: 'aspect-[4/3]',
-    video: '/最后一次贪睡.mp4',
+    video: `${import.meta.env.BASE_URL}最后一次贪睡.mp4`,
     type: 'video',
   },
   {
@@ -16,7 +16,7 @@ const projects = [
     desc: '滑雪视频作品',
     span: 'col-span-5',
     aspect: 'aspect-square',
-    video: '/滑雪.mp4',
+    video: `${import.meta.env.BASE_URL}滑雪.mp4`,
     type: 'video',
   },
   {
@@ -24,7 +24,7 @@ const projects = [
     desc: '视频作品',
     span: 'col-span-5',
     aspect: 'aspect-square',
-    video: '/1.mp4',
+    video: `${import.meta.env.BASE_URL}1.mp4`,
     type: 'video',
   },
   {
@@ -32,7 +32,7 @@ const projects = [
     desc: '游戏实况',
     span: 'col-span-7',
     aspect: 'aspect-[4/3]',
-    video: '/游戏切片.mp4',
+    video: `${import.meta.env.BASE_URL}游戏切片.mp4`,
     type: 'video',
   },
 ]

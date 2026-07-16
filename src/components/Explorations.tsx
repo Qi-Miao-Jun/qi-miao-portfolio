@@ -14,7 +14,7 @@ const items = [
   },
   {
     title: '黑白',
-    img: '/黑白.jpg',
+    img: `${import.meta.env.BASE_URL}黑白.jpg`,
     rotation: -1,
   },
   {

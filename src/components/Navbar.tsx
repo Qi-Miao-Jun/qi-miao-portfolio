@@ -93,7 +93,7 @@ export default function Navbar() {
               ×
             </button>
             <img
-              src="/微信.jpg"
+              src={`${import.meta.env.BASE_URL}微信.jpg`}
               alt="WeChat QR Code"
               className="w-64 h-64 object-cover rounded-xl"
             />
