@@ -100,7 +100,7 @@ export default function Hero() {
           transition={{ delay: 0.7, duration: 1 }}
           className="text-sm md:text-base text-muted max-w-md mb-12"
         >
-          为了找工作不得不折腾一个个人网站
+          若视频长时间加载不出来请点击View all work查看
         </motion.p>
 
         {/* CTA Buttons */}
