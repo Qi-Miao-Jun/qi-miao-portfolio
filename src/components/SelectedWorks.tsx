@@ -39,6 +39,15 @@ const projects = [
     type: 'video',
     link: 'https://www.bilibili.com/video/BV1D4HfzsEgC/?vd_source=de7fa7f290a69ba61f8df42ed92d22ed',
   },
+  {
+    title: 'pause',
+    desc: 'aigc实验作品',
+    span: 'col-span-12',
+    aspect: 'aspect-[16/9]',
+    video: '',
+    image: `${import.meta.env.BASE_URL}封面.png`,
+    type: 'image',
+    link: 'https://v.kuaishou.com/KAQ6YQu2',
   },
 ]
 
@@ -287,6 +296,12 @@ export default function SelectedWorks() {
                       e.currentTarget.currentTime = 0
                     }}
                   />
+                ) : project.image ? (
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
                 ) : (
                   <div className="w-full h-full bg-gradient-to-br from-surface to-bg flex items-center justify-center">
                     <span className="text-4xl text-muted/30 font-display italic">{project.title}</span>
@@ -307,7 +322,7 @@ export default function SelectedWorks() {
               {/* Hover overlay */}
               <div className="bento-overlay absolute inset-0 flex items-center justify-center">
                 <div className="gradient-pill-border rounded-full px-6 py-3 bg-white flex items-center gap-2 text-bg text-sm font-medium">
-                  {project.video ? '▶ Play' : '↗ Open'} — <span className="font-display italic">{project.title}</span>
+                  {project.video ? '▶ Play' : project.image ? '↗ View' : '↗ Open'} — <span className="font-display italic">{project.title}</span>
                 </div>
               </div>
             </motion.div>
