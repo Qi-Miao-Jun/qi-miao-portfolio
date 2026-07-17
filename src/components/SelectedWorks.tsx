@@ -39,14 +39,6 @@ const projects = [
     type: 'video',
     link: 'https://www.bilibili.com/video/BV1D4HfzsEgC/?vd_source=de7fa7f290a69ba61f8df42ed92d22ed',
   },
-  {
-    title: 'pause',
-    desc: 'aigc实验作品',
-    span: 'col-span-12',
-    aspect: 'aspect-[16/9]',
-    video: '',
-    type: 'video',
-    link: 'https://v.kuaishou.com/KAQ6YQu2',
   },
 ]
 
