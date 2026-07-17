@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { X, Volume2, VolumeX, Play, Pause } from 'lucide-react'
+import { X, Volume2, VolumeX, Play, Pause, ExternalLink } from 'lucide-react'
 
 const projects = [
   {
@@ -10,6 +10,7 @@ const projects = [
     aspect: 'aspect-[4/3]',
     video: `${import.meta.env.BASE_URL}最后一次贪睡.mp4`,
     type: 'video',
+    link: 'https://www.bilibili.com/video/BV1eGKH6KEBR/?vd_source=de7fa7f290a69ba61f8df42ed92d22ed',
   },
   {
     title: '滑雪',
@@ -18,6 +19,7 @@ const projects = [
     aspect: 'aspect-square',
     video: `${import.meta.env.BASE_URL}滑雪.mp4`,
     type: 'video',
+    link: 'https://www.bilibili.com/video/BV15GKH6TEqr/?vd_source=de7fa7f290a69ba61f8df42ed92d22ed',
   },
   {
     title: '实验短片',
@@ -26,6 +28,7 @@ const projects = [
     aspect: 'aspect-square',
     video: `${import.meta.env.BASE_URL}1.mp4`,
     type: 'video',
+    link: 'https://www.bilibili.com/video/BV15GKH6KEKc/?vd_source=de7fa7f290a69ba61f8df42ed92d22ed',
   },
   {
     title: '游戏粗剪',
@@ -34,6 +37,7 @@ const projects = [
     aspect: 'aspect-[4/3]',
     video: `${import.meta.env.BASE_URL}游戏切片.mp4`,
     type: 'video',
+    link: 'https://www.bilibili.com/video/BV1D4HfzsEgC/?vd_source=de7fa7f290a69ba61f8df42ed92d22ed',
   },
 ]
 
@@ -213,6 +217,7 @@ function VideoPlayer({ video, title, onClose }: { video: string; title: string; 
 
 export default function SelectedWorks() {
   const [selectedVideo, setSelectedVideo] = useState<{ video: string; title: string } | null>(null)
+  const [showAll, setShowAll] = useState(false)
 
   const handleCardClick = (project: typeof projects[0]) => {
     if (project.type === 'video') {
@@ -239,13 +244,14 @@ export default function SelectedWorks() {
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-display italic text-text-primary">
               Featured <span className="not-italic">projects</span>
             </h2>
-            <a
-              href="#"
+            <button
+              type="button"
+              onClick={() => setShowAll(true)}
               className="hidden md:inline-flex items-center gap-2 rounded-full border border-stroke px-5 py-2.5 text-sm text-muted hover:text-text-primary hover:border-white/20 transition-all duration-300 hover-pill w-fit"
             >
               View all work
               <span>→</span>
-            </a>
+            </button>
           </div>
           <p className="text-sm text-muted mt-4 max-w-lg">
             A selection of projects I've worked on, from concept to launch.
@@ -310,6 +316,85 @@ export default function SelectedWorks() {
             title={selectedVideo.title}
             onClose={() => setSelectedVideo(null)}
           />
+        )}
+      </AnimatePresence>
+
+      {/* All works modal */}
+      <AnimatePresence>
+        {showAll && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            className="fixed inset-0 z-[9998] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
+            onClick={() => setShowAll(false)}
+          >
+            <motion.div
+              initial={{ opacity: 0, y: 30, scale: 0.96 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 20, scale: 0.97 }}
+              transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+              className="relative w-full max-w-2xl max-h-[85vh] overflow-y-auto bg-surface border border-stroke rounded-3xl p-6 md:p-8"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Close button */}
+              <button
+                onClick={() => setShowAll(false)}
+                className="absolute top-4 right-4 w-9 h-9 rounded-full bg-bg border border-stroke text-muted hover:text-text-primary flex items-center justify-center transition-colors"
+                aria-label="Close"
+              >
+                <X size={18} />
+              </button>
+
+              {/* Header */}
+              <div className="mb-6 pr-10">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-8 h-px bg-stroke" />
+                  <span className="text-xs text-muted uppercase tracking-[0.3em]">All Work</span>
+                </div>
+                <h2 className="text-3xl md:text-4xl font-display italic text-text-primary">
+                  Every <span className="not-italic">project</span>
+                </h2>
+                <p className="text-sm text-muted mt-2">
+                  全部作品 · 点击跳转至 B 站观看完整版
+                </p>
+              </div>
+
+              {/* Project list */}
+              <div className="flex flex-col gap-3">
+                {projects.map((project, i) => (
+                  <motion.a
+                    key={project.title}
+                    href={project.link || '#'}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    initial={{ opacity: 0, y: 15 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4, delay: i * 0.05, ease: 'easeOut' }}
+                    className="group flex items-center gap-4 p-4 bg-bg/50 border border-stroke rounded-2xl hover:border-white/20 hover:bg-bg/80 transition-all duration-300"
+                  >
+                    <div className="w-10 h-10 rounded-full border border-stroke flex items-center justify-center text-xs text-muted font-mono flex-shrink-0">
+                      0{i + 1}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="text-base md:text-lg font-display italic text-text-primary group-hover:text-[#89AACC] transition-colors">
+                        {project.title}
+                      </h3>
+                      <p className="text-xs text-muted mt-0.5 truncate">{project.desc}</p>
+                    </div>
+                    <div className="w-9 h-9 rounded-full bg-white/5 border border-stroke flex items-center justify-center text-muted group-hover:text-text-primary group-hover:bg-white/10 group-hover:border-white/20 transition-all flex-shrink-0">
+                      <ExternalLink size={15} />
+                    </div>
+                  </motion.a>
+                ))}
+              </div>
+
+              <p className="text-xs text-muted/60 text-center mt-6">
+                在新标签页打开 B 站视频
+              </p>
+            </motion.div>
+          </motion.div>
         )}
       </AnimatePresence>
     </section>
