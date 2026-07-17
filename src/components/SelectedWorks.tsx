@@ -39,6 +39,15 @@ const projects = [
     type: 'video',
     link: 'https://www.bilibili.com/video/BV1D4HfzsEgC/?vd_source=de7fa7f290a69ba61f8df42ed92d22ed',
   },
+  {
+    title: 'pause',
+    desc: 'aigc实验作品',
+    span: 'col-span-12',
+    aspect: 'aspect-[16/9]',
+    video: '',
+    type: 'video',
+    link: 'https://v.kuaishou.com/KAQ6YQu2',
+  },
 ]
 
 function VideoPlayer({ video, title, onClose }: { video: string; title: string; onClose: () => void }) {
@@ -220,8 +229,10 @@ export default function SelectedWorks() {
   const [showAll, setShowAll] = useState(false)
 
   const handleCardClick = (project: typeof projects[0]) => {
-    if (project.type === 'video') {
+    if (project.video) {
       setSelectedVideo({ video: project.video, title: project.title })
+    } else if (project.link) {
+      window.open(project.link, '_blank', 'noopener,noreferrer')
     }
   }
 
@@ -272,7 +283,7 @@ export default function SelectedWorks() {
             >
               {/* Background media */}
               <div className="absolute inset-0">
-                {project.type === 'video' ? (
+                {project.video ? (
                   <video
                     src={project.video}
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
@@ -284,7 +295,11 @@ export default function SelectedWorks() {
                       e.currentTarget.currentTime = 0
                     }}
                   />
-                ) : null}
+                ) : (
+                  <div className="w-full h-full bg-gradient-to-br from-surface to-bg flex items-center justify-center">
+                    <span className="text-4xl text-muted/30 font-display italic">{project.title}</span>
+                  </div>
+                )}
                 {/* Halftone overlay */}
                 <div className="absolute inset-0 bento-halftone" />
               </div>
@@ -300,7 +315,7 @@ export default function SelectedWorks() {
               {/* Hover overlay */}
               <div className="bento-overlay absolute inset-0 flex items-center justify-center">
                 <div className="gradient-pill-border rounded-full px-6 py-3 bg-white flex items-center gap-2 text-bg text-sm font-medium">
-                  {project.type === 'video' ? '▶ Play' : 'View'} — <span className="font-display italic">{project.title}</span>
+                  {project.video ? '▶ Play' : '↗ Open'} — <span className="font-display italic">{project.title}</span>
                 </div>
               </div>
             </motion.div>
